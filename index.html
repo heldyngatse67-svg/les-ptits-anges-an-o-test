@@ -1,0 +1,1530 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#087f62">
+<meta name="description" content="AN.O Santé — plateforme associative d'information, d'écoute et de soutien en santé.">
+<title>AN.O Santé — Votre santé, notre priorité</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --green: #087f62;
+  --green-dark: #075d49;
+  --green-light: #eaf5ef;
+  --teal: #19b8a0;
+  --orange: #f2a75b;
+  --bg: #f5f8f7;
+  --white: #fff;
+  --text: #193a30;
+  --muted: #7a8c84;
+  --border: #e6eeea;
+  --shadow: 0 10px 35px rgba(20, 64, 46, .05);
+  --radius: 20px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+.layout { min-height: 100vh; }
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 250px;
+  background: #fff;
+  border-right: 1px solid var(--border);
+  padding: 25px 17px;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0 10px 27px;
+}
+
+.logo-mark {
+  width: 43px;
+  height: 43px;
+  background: var(--green);
+  color: white;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+}
+
+.logo-name {
+  font-family: Manrope, sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: -.5px;
+}
+
+.logo-name span { color: var(--green); }
+.logo-sub { font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+.menu-label {
+  font-size: 10px;
+  font-weight: 800;
+  color: #a0afa8;
+  letter-spacing: 1.2px;
+  padding: 15px 12px 9px;
+}
+
+.menu {
+  display: grid;
+  gap: 5px;
+}
+
+.menu-item {
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 11px;
+  text-align: left;
+  color: #65786f;
+  font-size: 13px;
+  font-weight: 600;
+  transition: .2s;
+  width: 100%;
+}
+
+.menu-item:hover { background: #f4f8f6; color: var(--green); }
+.menu-item.active { background: var(--green-light); color: var(--green); }
+.menu-icon { width: 22px; text-align: center; font-size: 17px; }
+
+.sidebar-bottom { margin-top: auto; }
+
+.support-card {
+  background: #eaf5ef;
+  border-radius: 17px;
+  padding: 16px;
+  margin: 15px 4px;
+}
+
+.support-card h4 { font-size: 13px; margin-bottom: 7px; }
+.support-card p { font-size: 11px; color: #698176; line-height: 1.6; margin-bottom: 12px; }
+
+.support-card button {
+  border: none;
+  color: white;
+  background: var(--green);
+  border-radius: 9px;
+  padding: 10px;
+  width: 100%;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.profile {
+  border-top: 1px solid var(--border);
+  padding: 16px 7px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  background: #e4efe9;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--green);
+  flex-shrink: 0;
+}
+
+.profile-name { font-size: 12px; font-weight: 700; }
+.profile-role { color: var(--muted); font-size: 10px; margin-top: 3px; }
+
+/* MAIN */
+.main {
+  margin-left: 250px;
+  min-height: 100vh;
+}
+
+.topbar {
+  height: 72px;
+  background: rgba(255,255,255,.9);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 35px;
+  position: sticky;
+  top: 0;
+  z-index: 80;
+  backdrop-filter: blur(12px);
+}
+
+.breadcrumb { font-size: 13px; color: var(--muted); }
+.breadcrumb strong { color: var(--text); }
+
+.topbar-actions { display: flex; align-items: center; gap: 12px; }
+
+.language-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.language-switch button {
+  border: 0;
+  border-radius: 7px;
+  padding: 6px 8px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.language-switch button.active {
+  background: var(--green-light);
+  color: var(--green);
+}
+
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border);
+  background: white;
+  border-radius: 11px;
+  position: relative;
+}
+
+.notification-dot {
+  width: 7px;
+  height: 7px;
+  background: #f17b5b;
+  border-radius: 50%;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.top-cta {
+  background: var(--green);
+  border: none;
+  color: white;
+  border-radius: 10px;
+  padding: 11px 15px;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.mobile-toggle {
+  display: none;
+  border: 1px solid var(--border);
+  background: white;
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+}
+
+/* PAGE */
+.content {
+  max-width: 1450px;
+  padding: 30px 35px 70px;
+  margin: auto;
+}
+
+.page { display: none; animation: fadeIn .3s ease; }
+.page.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.welcome {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 23px;
+}
+
+.welcome h1 {
+  font-family: Manrope, sans-serif;
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -.8px;
+  margin-bottom: 7px;
+}
+
+.welcome p { font-size: 13px; color: var(--muted); }
+
+.date-pill {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 11px 14px;
+  font-size: 12px;
+  color: #697d73;
+}
+
+/* HERO */
+.hero {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  min-height: 315px;
+  border-radius: 25px;
+  overflow: hidden;
+  background: #e6f2eb;
+  margin-bottom: 25px;
+}
+
+.hero-text {
+  padding: 35px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  gap: 6px;
+  background: #d3eae0;
+  color: var(--green);
+  border-radius: 30px;
+  padding: 8px 12px;
+  font-size: 10px;
+  font-weight: 800;
+  margin-bottom: 17px;
+}
+
+.hero h2 {
+  font-family: Manrope, sans-serif;
+  font-size: clamp(28px, 3vw, 41px);
+  letter-spacing: -1.4px;
+  line-height: 1.15;
+  margin-bottom: 13px;
+}
+
+.hero h2 span { color: var(--green); }
+
+.hero p {
+  font-size: 13px;
+  line-height: 1.75;
+  color: #637a6e;
+  max-width: 470px;
+  margin-bottom: 20px;
+}
+
+.hero-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.btn {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 12px;
+  font-weight: 800;
+  transition: .2s;
+}
+
+.btn-primary { background: var(--green); color: white; }
+.btn-primary:hover { background: var(--green-dark); transform: translateY(-1px); }
+.btn-secondary { background: white; color: var(--green); border: 1px solid var(--border); }
+.btn-outline { background: transparent; color: var(--green); border: 1px solid #c9ddd3; }
+
+.hero-image {
+  min-height: 300px;
+  position: relative;
+  background: url('https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=1100&q=85') center/cover;
+}
+
+.hero-floating {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  right: 18px;
+  background: rgba(255,255,255,.94);
+  border-radius: 14px;
+  padding: 13px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.floating-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: #e4f3ec;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+
+.hero-floating strong { display: block; font-size: 12px; }
+.hero-floating small { font-size: 10px; color: var(--muted); }
+
+/* COMMON GRID / CARDS */
+.section-title {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 28px 0 17px;
+}
+
+.section-title h2 {
+  font-family: Manrope, sans-serif;
+  font-size: 19px;
+  letter-spacing: -.4px;
+}
+
+.section-title p { font-size: 11px; color: var(--muted); margin-top: 5px; }
+
+.text-link {
+  border: none;
+  background: transparent;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.service {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  padding: 20px;
+  transition: .2s;
+}
+
+.service:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+
+.service-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  font-size: 21px;
+  margin-bottom: 14px;
+}
+
+.ic-green { background: #e3f3eb; }
+.ic-blue { background: #e7f2fb; }
+.ic-orange { background: #fff1e2; }
+.ic-purple { background: #f0eafb; }
+
+.service h3 { font-size: 13px; margin-bottom: 7px; }
+.service p { color: var(--muted); font-size: 11px; line-height: 1.65; margin-bottom: 12px; }
+.service button { background: transparent; border: none; color: var(--green); font-size: 11px; font-weight: 800; }
+
+/* TWO COLUMN */
+.two-col {
+  display: grid;
+  grid-template-columns: 1.25fr .75fr;
+  gap: 18px;
+}
+
+.panel {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 19px;
+  padding: 22px;
+}
+
+.panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.panel-heading h3 { font-size: 14px; }
+.panel-heading span { font-size: 11px; color: var(--muted); }
+
+/* COMMUNITY PREVIEW */
+.community-preview {
+  display: grid;
+  gap: 14px;
+}
+
+.post {
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 16px;
+}
+
+.post-head {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 11px;
+}
+
+.post-head .avatar { width: 35px; height: 35px; }
+.post-meta strong { font-size: 11px; display: block; }
+.post-meta small { font-size: 10px; color: var(--muted); display: block; margin-top: 3px; }
+
+.post-tag {
+  display: inline-block;
+  background: #edf6f1;
+  color: var(--green);
+  padding: 5px 9px;
+  font-size: 9px;
+  font-weight: 800;
+  border-radius: 20px;
+  margin-bottom: 9px;
+}
+
+.post h4 { font-size: 13px; margin-bottom: 7px; }
+.post > p { font-size: 11px; color: #718279; line-height: 1.7; }
+
+.post-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 13px;
+}
+
+.post-actions button {
+  border: none;
+  background: transparent;
+  font-size: 10px;
+  color: #718279;
+}
+
+.post-actions button.liked { color: #e45d69; }
+
+/* SIDE PANEL */
+.quick-list { display: grid; gap: 12px; }
+
+.quick-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 11px 0;
+  border-bottom: 1px solid #f0f3f1;
+}
+
+.quick-item:last-child { border-bottom: none; }
+.quick-icon { width: 38px; height: 38px; border-radius: 12px; background: #eaf5ef; display: grid; place-items: center; font-size: 17px; }
+.quick-item strong { display: block; font-size: 11px; }
+.quick-item small { display: block; font-size: 10px; color: var(--muted); margin-top: 4px; }
+
+/* COMMUNITY PAGE */
+.community-banner {
+  border-radius: 20px;
+  background: linear-gradient(120deg, #e3f3eb, #f2faf6);
+  padding: 25px;
+  margin-bottom: 20px;
+}
+
+.community-banner h2 { font-family: Manrope, sans-serif; font-size: 23px; margin-bottom: 7px; }
+.community-banner p { color: #698176; font-size: 12px; line-height: 1.7; max-width: 650px; }
+
+.community-layout {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 18px;
+  align-items: start;
+}
+
+.feed { display: grid; gap: 15px; }
+
+.create-post {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.create-top { display: flex; gap: 12px; align-items: center; }
+
+.create-top textarea {
+  flex: 1;
+  border: 1px solid var(--border);
+  background: #f8fbf9;
+  border-radius: 12px;
+  padding: 13px;
+  resize: vertical;
+  min-height: 70px;
+  outline: none;
+  font-size: 12px;
+}
+
+.create-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.create-bottom select {
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 9px;
+  background: white;
+  font-size: 11px;
+  color: #61766c;
+}
+
+.feed-post {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 19px;
+}
+
+.feed-post .post-body { font-size: 12px; line-height: 1.8; color: #60756a; }
+
+.comments {
+  margin-top: 13px;
+  border-top: 1px solid var(--border);
+  padding-top: 13px;
+  display: none;
+}
+
+.comments.open { display: block; }
+
+.comment {
+  background: #f6f9f7;
+  border-radius: 11px;
+  padding: 10px;
+  font-size: 10px;
+  line-height: 1.6;
+  color: #64786d;
+  margin-bottom: 8px;
+}
+
+.comment-form { display: flex; gap: 8px; margin-top: 9px; }
+.comment-form input { flex: 1; min-width: 0; border: 1px solid var(--border); border-radius: 9px; padding: 10px; font-size: 11px; outline: none; }
+.comment-form button { border: none; background: var(--green); color: white; border-radius: 9px; padding: 0 13px; font-size: 11px; }
+
+.community-sidebar .panel { margin-bottom: 15px; }
+.group-list { display: grid; gap: 9px; }
+
+.group {
+  border: 1px solid var(--border);
+  background: white;
+  padding: 12px;
+  border-radius: 12px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.group-emoji { width: 36px; height: 36px; background: #edf5ef; border-radius: 11px; display: grid; place-items: center; }
+.group strong { font-size: 11px; display: block; }
+.group small { color: var(--muted); font-size: 9px; display: block; margin-top: 4px; }
+
+/* PROGRAMS */
+.program-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 17px;
+}
+
+.program-card {
+  border-radius: 18px;
+  background: white;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.program-img { height: 180px; background-size: cover; background-position: center; }
+.program-body { padding: 17px; }
+.program-body .post-tag { margin-bottom: 9px; }
+.program-body h3 { font-size: 14px; margin-bottom: 8px; }
+.program-body p { font-size: 11px; color: var(--muted); line-height: 1.7; margin-bottom: 13px; }
+
+/* HEALTH FORM */
+.health-layout { display: grid; grid-template-columns: .85fr 1.15fr; gap: 18px; }
+.health-intro {
+  background: #e7f3ec;
+  border-radius: 19px;
+  padding: 25px;
+}
+.health-intro h2 { font-family: Manrope, sans-serif; font-size: 24px; margin: 13px 0; }
+.health-intro p { font-size: 12px; color: #678075; line-height: 1.8; }
+.health-intro img { width: 100%; height: 190px; object-fit: cover; border-radius: 14px; margin-top: 17px; }
+
+.form-card { background: white; border: 1px solid var(--border); border-radius: 19px; padding: 24px; }
+.form-card h3 { font-size: 17px; margin-bottom: 7px; }
+.form-card > p { font-size: 11px; color: var(--muted); margin-bottom: 19px; }
+
+.form-group { margin-bottom: 14px; }
+.form-group label { display: block; font-size: 11px; font-weight: 800; margin-bottom: 7px; }
+.form-group input, .form-group textarea, .form-group select {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fbfdfc;
+  padding: 12px;
+  outline: none;
+  font-size: 12px;
+}
+.form-group textarea { min-height: 115px; resize: vertical; }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--green); }
+.form-card .btn { width: 100%; }
+
+.notice { font-size: 10px; color: #a17943; line-height: 1.6; background: #fff7ea; padding: 12px; border-radius: 10px; margin-top: 13px; }
+
+/* MEDICAL RECORD */
+.record-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.record-card { background: white; border: 1px solid var(--border); border-radius: 17px; padding: 20px; }
+.record-card h3 { font-size: 13px; margin-bottom: 12px; }
+.record-empty { color: var(--muted); font-size: 11px; line-height: 1.7; }
+
+/* ASSOCIATION */
+.association-block {
+  background: #075d49;
+  color: white;
+  border-radius: 22px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.association-text { padding: 35px; }
+.association-text h2 { font-family: Manrope, sans-serif; font-size: 27px; line-height: 1.3; margin: 13px 0; }
+.association-text p { font-size: 12px; color: #c1d8cd; line-height: 1.8; margin-bottom: 19px; }
+.association-img { min-height: 300px; background: url('https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=1100&q=85') center/cover; }
+
+/* MODAL */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(9, 31, 23, .6);
+  display: none;
+  place-items: center;
+  padding: 20px;
+  z-index: 500;
+}
+.modal.show { display: grid; }
+.modal-box {
+  width: min(100%, 440px);
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+}
+.modal-box h2 { font-family: Manrope, sans-serif; font-size: 21px; margin-bottom: 12px; }
+.modal-box p { color: var(--muted); font-size: 12px; line-height: 1.8; margin-bottom: 18px; }
+.modal-close { float: right; border: none; background: #edf5f0; width: 33px; height: 33px; border-radius: 50%; font-size: 19px; }
+
+/* LISIBILITE & CONFIANCE */
+body { line-height: 1.55; }
+.welcome p,
+.hero p,
+.section-title p,
+.service p,
+.post > p,
+.feed-post .post-body,
+.community-banner p,
+.health-intro p,
+.form-card > p,
+.record-empty,
+.program-body p,
+.association-text p,
+.quick-item small,
+.group small {
+  font-size: 13px;
+  line-height: 1.75;
+  color: #526a60;
+}
+
+.service h3,
+.record-card h3,
+.program-body h3,
+.panel-heading h3 { font-size: 15px; }
+
+.service button,
+.text-link,
+.post-actions button,
+.group strong,
+.quick-item strong,
+.form-group label,
+.comment,
+.comment-form input,
+.comment-form button,
+.create-bottom select {
+  font-size: 12px;
+}
+
+.breadcrumb,
+.welcome p,
+.date-pill,
+.notice,
+.post-meta small,
+.post-tag,
+.profile-role,
+.logo-sub {
+  font-weight: 500;
+}
+
+.trust-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 0 0 22px;
+}
+
+.trust-item {
+  min-height: 76px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.trust-item-icon {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--green-light);
+  font-size: 19px;
+}
+
+.trust-item strong { display: block; font-size: 13px; margin-bottom: 3px; }
+.trust-item span { display: block; font-size: 11px; line-height: 1.55; color: var(--muted); }
+
+.medical-disclaimer {
+  margin: 20px 0;
+  padding: 14px 16px;
+  border: 1px solid #efdca9;
+  border-left: 4px solid #dfaa45;
+  border-radius: 12px;
+  background: #fffaf0;
+  color: #775a2d;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.content-footer {
+  margin-top: 38px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: #6d8177;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.content-footer strong { color: var(--text); }
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(25, 184, 160, .35);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: fixed;
+  left: 12px;
+  top: -100px;
+  z-index: 1000;
+  background: var(--text);
+  color: white;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+}
+.skip-link:focus { top: 12px; }
+
+/* MOBILE */
+@media(max-width: 1150px) {
+  .sidebar { width: 225px; }
+  .main { margin-left: 225px; }
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .community-layout { grid-template-columns: 1fr; }
+  .community-sidebar { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+}
+
+@media(max-width: 850px) {
+  .sidebar { transform: translateX(-100%); transition: .25s; box-shadow: none; }
+  .sidebar.open { transform: translateX(0); box-shadow: 10px 0 40px rgba(0,0,0,.1); }
+  .main { margin-left: 0; }
+  .mobile-toggle { display: block; }
+  .topbar { padding: 0 18px; }
+  .content { padding: 25px 18px 50px; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-image { min-height: 270px; }
+  .two-col { grid-template-columns: 1fr; }
+  .health-layout { grid-template-columns: 1fr; }
+  .health-intro img { height: 250px; }
+  .association-block { grid-template-columns: 1fr; }
+  .association-img { min-height: 250px; }
+}
+
+@media(max-width: 600px) {
+  .topbar { height: 62px; }
+  .trust-strip { grid-template-columns: 1fr; }
+  .content-footer { flex-direction: column; }
+  .top-cta { display: none; }
+  .welcome { align-items: start; flex-direction: column; }
+  .welcome h1 { font-size: 23px; }
+  .date-pill { font-size: 10px; }
+  .hero-text { padding: 26px 22px; }
+  .hero h2 { font-size: 32px; }
+  .hero p { font-size: 14px; }
+  .hero-image { min-height: 240px; }
+  .section-title h2 { font-size: 17px; }
+  .services-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .service { padding: 15px; }
+  .service h3 { font-size: 12px; }
+  .service p { font-size: 12px; }
+  .panel { padding: 15px; }
+  .community-sidebar { grid-template-columns: 1fr; }
+  .program-grid { grid-template-columns: 1fr; }
+  .program-img { height: 200px; }
+  .record-grid { grid-template-columns: 1fr; }
+  .association-text { padding: 25px; }
+  .association-text h2 { font-size: 23px; }
+  .welcome .date-pill { display: none; }
+  .create-top { align-items: start; }
+  .create-top .avatar { margin-top: 8px; }
+  .create-bottom { flex-wrap: wrap; }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<a class="skip-link" href="#main-content">Aller au contenu principal</a>
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar" aria-label="Navigation principale">
+  <div class="logo">
+    <div class="logo-mark">✚</div>
+    <div>
+      <div class="logo-name">AN.O <span>SANTÉ</span></div>
+      <div class="logo-sub">La santé accessible à tous</div>
+    </div>
+  </div>
+
+  <div class="menu-label">MENU PRINCIPAL</div>
+  <nav class="menu">
+    <button class="menu-item active" data-page="home"><span class="menu-icon">⌂</span>Accueil</button>
+    <button class="menu-item" data-page="health"><span class="menu-icon">♡</span>Parler de ma santé</button>
+    <button class="menu-item" data-page="community"><span class="menu-icon">♧</span>Communauté</button>
+    <button class="menu-item" data-page="record"><span class="menu-icon">▤</span>Mon carnet de santé</button>
+    <button class="menu-item" data-page="programs"><span class="menu-icon">✚</span>Programmes de santé</button>
+    <button class="menu-item" data-page="association"><span class="menu-icon">🤝</span>Solidarité & association</button>
+  </nav>
+
+  <div class="menu-label">MON ESPACE</div>
+  <nav class="menu">
+    <button class="menu-item" data-page="record"><span class="menu-icon">⚙</span>Mon profil</button>
+    <button class="menu-item" onclick="openModal('telehealth')"><span class="menu-icon">♧</span>Mes rendez-vous</button>
+  </nav>
+
+  <div class="sidebar-bottom">
+    <div class="support-card">
+      <h4>Besoin d'aide ? 💚</h4>
+      <p>Notre mission est de vous accompagner vers une meilleure santé.</p>
+      <button onclick="openModal('support')">Nous contacter</button>
+    </div>
+
+    <div class="profile">
+      <div class="avatar">A</div>
+      <div>
+        <div class="profile-name">Visiteur AN.O</div>
+        <div class="profile-role">Compte découverte</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main" id="main-content">
+  <header class="topbar">
+    <div style="display:flex;align-items:center;gap:12px">
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Ouvrir le menu" aria-controls="sidebar" aria-expanded="false">☰</button>
+      <div class="breadcrumb">Plateforme / <strong id="breadcrumb">Accueil</strong></div>
+    </div>
+    <div class="topbar-actions">
+      <div class="language-switch" role="group" aria-label="Changer de langue">
+        <button type="button" data-language-choice="fr" aria-pressed="true">FR</button>
+        <button type="button" data-language-choice="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="icon-btn" title="Notifications" onclick="openModal('notifications')">♧<span class="notification-dot"></span></button>
+      <button class="top-cta" onclick="openModal('login')">Connexion / Inscription</button>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <!-- HOME PAGE -->
+    <section class="page active" id="page-home">
+      <div class="welcome">
+        <div>
+          <h1>Bonjour et bienvenue 👋</h1>
+          <p>Votre espace de santé, d'écoute, de soutien et de partage.</p>
+        </div>
+        <div class="date-pill" id="dateToday">✦ Votre santé compte</div>
+      </div>
+
+      <div class="hero">
+        <div class="hero-text">
+          <span class="eyebrow">✦ LA SANTÉ AU CENTRE DE NOS PRIORITÉS</span>
+          <h2>Vous n'êtes<br> <span>pas seul.</span></h2>
+          <p>
+            Parlez de votre santé, trouvez du soutien, partagez votre vécu
+            et accédez aux ressources qui peuvent vous aider.
+          </p>
+          <div class="hero-buttons">
+            <button class="btn btn-primary" data-goto="health">Parler de ma santé →</button>
+            <button class="btn btn-secondary" data-goto="community">Rejoindre la communauté</button>
+          </div>
+        </div>
+        <div class="hero-image">
+          <div class="hero-floating">
+            <div class="floating-icon">💚</div>
+            <div><strong>Une communauté à votre écoute</strong><small>Solidarité · Prévention · Accompagnement</small></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="trust-strip" aria-label="Informations importantes">
+        <div class="trust-item">
+          <div class="trust-item-icon">🔒</div>
+          <div><strong>Données protégées</strong><span>Après configuration, les données du compte sont traitées par Supabase et protégées par des autorisations.</span></div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-item-icon">🩺</div>
+          <div><strong>Information, pas diagnostic</strong><span>Les contenus ne remplacent pas une consultation.</span></div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-item-icon">💚</div>
+          <div><strong>Soutien respectueux</strong><span>La bienveillance et la protection des membres priment.</span></div>
+        </div>
+      </div>
+
+      <div class="medical-disclaimer" role="note">
+        <strong>Information importante :</strong> AN.O Santé est un prototype associatif. Pour une urgence ou une détérioration de votre état, contactez immédiatement les services de santé locaux.
+      </div>
+
+      <div class="section-title">
+        <div><h2>Comment pouvons-nous vous aider ?</h2><p>Découvrez les services disponibles sur AN.O Santé.</p></div>
+      </div>
+
+      <div class="services-grid">
+        <div class="service">
+          <div class="service-icon ic-green">💬</div>
+          <h3>Parler de ma santé</h3>
+          <p>Exprimez vos préoccupations, symptômes ou besoins de santé.</p>
+          <button data-goto="health">Faire une demande →</button>
+        </div>
+        <div class="service">
+          <div class="service-icon ic-blue">🤝</div>
+          <h3>Communauté</h3>
+          <p>Échangez, partagez vos expériences et soutenez d'autres membres.</p>
+          <button data-goto="community">Participer →</button>
+        </div>
+        <div class="service">
+          <div class="service-icon ic-orange">📋</div>
+          <h3>Carnet de santé</h3>
+          <p>Retrouvez vos informations de santé et préparez votre suivi médical.</p>
+          <button data-goto="record">Découvrir →</button>
+        </div>
+        <div class="service">
+          <div class="service-icon ic-purple">🩺</div>
+          <h3>Services médicaux</h3>
+          <p>Découvrez les possibilités d'orientation et de consultation médicale.</p>
+          <button data-goto="programs">Voir les programmes →</button>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div>
+          <div class="section-title">
+            <div><h2>La communauté s'exprime</h2><p>Les derniers échanges et témoignages</p></div>
+            <button class="text-link" data-goto="community">Tout voir →</button>
+          </div>
+          <div class="community-preview" id="homeFeed"></div>
+        </div>
+        <div>
+          <div class="section-title">
+            <div><h2>À découvrir</h2><p>Nos initiatives et programmes</p></div>
+          </div>
+          <div class="panel">
+            <div class="quick-list">
+              <div class="quick-item"><div class="quick-icon">🩸</div><div><strong>Drépanocytose</strong><small>Informer et accompagner</small></div></div>
+              <div class="quick-item"><div class="quick-icon">🌍</div><div><strong>Santé en milieu rural</strong><small>Rapprocher les soins</small></div></div>
+              <div class="quick-item"><div class="quick-icon">📱</div><div><strong>Santé numérique</strong><small>Des solutions connectées</small></div></div>
+              <div class="quick-item"><div class="quick-icon">💚</div><div><strong>Solidarité</strong><small>Des actions pour tous</small></div></div>
+            </div>
+            <button class="btn btn-primary" style="width:100%;margin-top:15px" data-goto="programs">Explorer nos programmes</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HEALTH PAGE -->
+    <section class="page" id="page-health">
+      <div class="welcome">
+        <div><h1>Parler de ma santé</h1><p>Exprimez votre besoin. Vous méritez d'être écouté.</p></div>
+      </div>
+
+      <div class="health-layout">
+        <div class="health-intro">
+          <span class="eyebrow">UN ESPACE D'ÉCOUTE</span>
+          <h2>Votre santé mérite toute notre attention.</h2>
+          <p>Décrivez votre situation, posez une question ou indiquez le type d'accompagnement dont vous avez besoin. Votre message ne constitue pas une consultation médicale.</p>
+          <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=85" alt="Professionnel de santé" loading="lazy">
+        </div>
+
+        <div class="form-card">
+          <h3>Exprimez-vous librement</h3>
+          <p>Ce formulaire n’est pas opérationnel. N’y saisissez aucune information médicale : aucun message ne sera transmis.</p>
+          <form id="healthForm">
+            <div class="form-group"><label>Votre nom ou pseudo</label><input id="healthName" required placeholder="Comment pouvons-nous vous appeler ?"></div>
+            <div class="form-group"><label>Quel est votre besoin ?</label>
+              <select id="healthCategory" required>
+                <option value="">Sélectionnez un sujet</option>
+                <option>Symptômes ou problème de santé</option>
+                <option>Demande d'orientation médicale</option>
+                <option>Drépanocytose</option>
+                <option>Santé de mon enfant</option>
+                <option>Bien-être et écoute</option>
+                <option>Prévention et information</option>
+                <option>Accompagnement social</option>
+                <option>Autre</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Votre message</label><textarea id="healthMessage" required placeholder="Décrivez votre situation ou votre besoin..."></textarea></div>
+            <button class="btn btn-primary" type="submit">Envoyer mon message →</button>
+            <div class="notice">⚠️ En cas d'urgence médicale, ne tardez pas à demander de l'aide en vous rendant dans une structure de soins. Ne partagez pas ici vos informations médicales confidentielles.</div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMUNITY PAGE -->
+    <section class="page" id="page-community">
+      <div class="welcome">
+        <div><h1>Communauté & échanges</h1><p>Partager, écouter et s'entraider dans un espace bienveillant.</p></div>
+      </div>
+
+      <div class="community-banner">
+        <h2>Vous n'êtes pas seul 💚</h2>
+        <p>La communauté AN.O Santé est un espace de soutien, de partage d'expériences et d'écoute. Respectez chacun, protégez votre vie privée et encouragez-vous mutuellement.</p>
+      </div>
+
+      <div class="community-layout">
+        <div class="feed">
+          <div class="create-post">
+            <div class="create-top">
+              <div class="avatar">A</div>
+              <textarea id="newPostText" placeholder="Qu'aimeriez-vous partager avec la communauté ?"></textarea>
+            </div>
+            <div class="create-bottom">
+              <select id="newPostGroup">
+                <option value="Communauté générale">Communauté générale</option>
+                <option value="Drépanocytose">Drépanocytose</option>
+                <option value="Santé des enfants">Santé des enfants</option>
+                <option value="Bien-être et écoute">Bien-être et écoute</option>
+                <option value="Santé rurale">Santé rurale</option>
+              </select>
+              <button class="btn btn-primary" id="publishPost">Publier</button>
+            </div>
+          </div>
+          <div id="communityFeed" class="feed"></div>
+        </div>
+
+        <aside class="community-sidebar">
+          <div class="panel">
+            <div class="panel-heading"><h3>Thématiques de discussion</h3></div>
+            <div class="group-list">
+              <div class="group"><div class="group-emoji">🩸</div><div><strong>Drépanocytose</strong><small>Patients & familles</small></div></div>
+              <div class="group"><div class="group-emoji">👶</div><div><strong>Santé des enfants</strong><small>Parents & aidants</small></div></div>
+              <div class="group"><div class="group-emoji">💚</div><div><strong>Bien-être & écoute</strong><small>Se soutenir</small></div></div>
+              <div class="group"><div class="group-emoji">🌍</div><div><strong>Santé rurale</strong><small>Communautés éloignées</small></div></div>
+            </div>
+          </div>
+          <div class="panel">
+            <h3 style="font-size:13px;margin-bottom:10px">Nos règles de bienveillance</h3>
+            <p style="font-size:11px;color:var(--muted);line-height:1.8">
+              • Respecter les autres membres.<br>
+              • Ne pas poser de diagnostic.<br>
+              • Ne pas recommander de traitements dangereux.<br>
+              • Ne jamais publier de données privées.<br>
+              • Signaler tout contenu problématique.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- RECORD PAGE -->
+    <section class="page" id="page-record">
+      <div class="welcome">
+        <div><h1>Mon carnet de santé</h1><p>Un espace pour préparer et organiser votre suivi de santé.</p></div>
+      </div>
+      <div class="community-banner">
+        <h2>Votre santé, vos informations</h2>
+        <p>Après configuration et connexion, votre carnet affiche les informations de santé protégées par les règles d’accès Supabase. Aucune donnée fictive n’est affichée.</p>
+      </div>
+      <div class="record-grid" aria-live="polite">
+        <div class="record-card"><p class="record-empty">Chargement sécurisé du carnet médical…</p></div>
+      </div>
+    </section>
+
+    <!-- PROGRAMS PAGE -->
+    <section class="page" id="page-programs">
+      <div class="welcome">
+        <div><h1>Programmes de santé</h1><p>Des initiatives pour informer, accompagner et rapprocher les soins.</p></div>
+      </div>
+      <div class="program-grid">
+        <div class="program-card">
+          <div class="program-img" style="background-image:url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=900&q=85')"></div>
+          <div class="program-body"><span class="post-tag">SENSIBILISATION</span><h3>Drépanocytose</h3><p>Informer les patients et familles, encourager le dépistage et soutenir les personnes concernées.</p><button class="text-link" onclick="openModal('sickle')">En savoir plus →</button></div>
+        </div>
+        <div class="program-card">
+          <div class="program-img" style="background-image:url('https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=900&q=85')"></div>
+          <div class="program-body"><span class="post-tag">INCLUSION</span><h3>Santé en milieu rural</h3><p>Réfléchir à des solutions de santé connectée et d'orientation pour les communautés éloignées.</p><button class="text-link" onclick="openModal('rural')">En savoir plus →</button></div>
+        </div>
+        <div class="program-card">
+          <div class="program-img" style="background-image:url('https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=900&q=85')"></div>
+          <div class="program-body"><span class="post-tag">INNOVATION</span><h3>Télémédecine</h3><p>Faciliter l'accès aux professionnels, aux rendez-vous et à l'information de santé.</p><button class="text-link" onclick="openModal('telehealth')">En savoir plus →</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ASSOCIATION PAGE -->
+    <section class="page" id="page-association">
+      <div class="welcome">
+        <div><h1>Solidarité & association</h1><p>Une approche humaine au service de la santé et de l'inclusion.</p></div>
+      </div>
+      <div class="association-block">
+        <div class="association-text">
+          <span class="eyebrow" style="background:#17634e;color:#c9ead9">SANTÉ · SOLIDARITÉ · ENGAGEMENT</span>
+          <h2>La technologie au service de l'humain.</h2>
+          <p>AN.O Santé a vocation à prolonger les initiatives de prévention, d'accompagnement et de solidarité. La plateforme est ouverte à tous les patients et peut accueillir différents programmes associatifs et partenaires de santé.</p>
+          <button class="btn btn-secondary" onclick="openModal('association')">Découvrir la vision du projet</button>
+        </div>
+        <div class="association-img"></div>
+      </div>
+      <div class="section-title"><div><h2>Nos axes d'engagement</h2><p>Des actions qui rapprochent la santé des communautés.</p></div></div>
+      <div class="services-grid">
+        <div class="service"><div class="service-icon ic-green">🩸</div><h3>Sensibilisation</h3><p>Promouvoir l'information sur les maladies, la prévention et le dépistage.</p></div>
+        <div class="service"><div class="service-icon ic-blue">🤝</div><h3>Accompagnement</h3><p>Soutenir les patients, les familles et les personnes vulnérables.</p></div>
+        <div class="service"><div class="service-icon ic-orange">🌍</div><h3>Inclusion rurale</h3><p>Faciliter l'accès à l'information et aux soins pour tous.</p></div>
+        <div class="service"><div class="service-icon ic-purple">📱</div><h3>Innovation</h3><p>Créer des solutions numériques accessibles et adaptées au contexte local.</p></div>
+      </div>
+    </section>
+
+    <footer class="content-footer">
+      <div><strong>AN.O Santé</strong><br>Information, écoute et solidarité.</div>
+      <div>Les contenus de cette plateforme ne constituent pas un diagnostic médical.<br>Les fonctions de contact et de rendez-vous ne sont pas encore disponibles.</div>
+    </footer>
+
+  </div>
+</main>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose">×</button>
+    <h2 id="modalTitle">AN.O Santé</h2>
+    <p id="modalText"></p>
+    <button class="btn btn-primary" id="modalAction">Compris</button>
+  </div>
+</div>
+
+<script src="/translations.js"></script>
+<script>
+/* NAVIGATION */
+const pages = document.querySelectorAll('.page');
+const menuItems = document.querySelectorAll('.menu-item[data-page]');
+const breadcrumb = document.getElementById('breadcrumb');
+const sidebar = document.getElementById('sidebar');
+
+const pageNames = {
+  home: 'Accueil',
+  health: 'Parler de ma santé',
+  community: 'Communauté',
+  record: 'Mon carnet de santé',
+  programs: 'Programmes de santé',
+  association: 'Solidarité & association'
+};
+
+function navigate(page) {
+  pages.forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + page);
+  if (target) target.classList.add('active');
+
+  menuItems.forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.page === page);
+  });
+
+  breadcrumb.textContent = pageNames[page] || 'Accueil';
+  sidebar.classList.remove('open');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+menuItems.forEach(btn => {
+  btn.addEventListener('click', () => navigate(btn.dataset.page));
+});
+
+document.querySelectorAll('[data-goto]').forEach(btn => {
+  btn.addEventListener('click', () => navigate(btn.dataset.goto));
+});
+
+document.getElementById('mobileToggle').addEventListener('click', () => {
+  const isOpen = sidebar.classList.toggle('open');
+  document.getElementById('mobileToggle').setAttribute('aria-expanded', String(isOpen));
+});
+
+/* MODAL */
+const modal = document.getElementById('modal');
+const modalTitle = document.getElementById('modalTitle');
+const modalText = document.getElementById('modalText');
+const modalAction = document.getElementById('modalAction');
+
+const modalContent = {
+  login: ['Connexion', 'L’espace personnel sera disponible après la mise en place du système sécurisé de comptes utilisateurs.'],
+  support: ['Besoin d’aide ?', 'La plateforme est en phase de prototype. Les coordonnées officielles de contact seront ajoutées après validation par les responsables du projet.'],
+  notifications: ['Notifications', 'Connectez-vous pour consulter les notifications enregistrées dans votre espace patient.'],
+  sickle: ['Programme drépanocytose', 'Ce programme vise à informer, sensibiliser et soutenir les patients et leurs familles. Les informations médicales devront être validées par des professionnels de santé.'],
+  rural: ['Santé rurale', 'Le projet vise à améliorer l’accès à l’information et à l’orientation médicale, notamment pour les communautés éloignées. Les outils devront tenir compte des connexions limitées et de la disponibilité locale des soins.'],
+  telehealth: ['Rendez-vous médicaux', 'La prise de rendez-vous n’est pas encore disponible. Aucune demande ne sera enregistrée depuis cette page.'],
+  association: ['Solidarité & engagement', 'La plateforme est conçue pour accueillir des initiatives de santé, des campagnes de prévention, des projets associatifs et des partenaires engagés au service des patients.']
+};
+
+function openModal(type) {
+  if (type === 'login') {
+    window.location.assign('./connexion.html');
+    return;
+  }
+  if (type === 'notifications') {
+    navigate('record');
+    return;
+  }
+  const content = modalContent[type] || ['AN.O Santé', 'Fonctionnalité en cours de préparation.'];
+  modalTitle.textContent = content[0];
+  modalText.textContent = content[1];
+  modalAction.textContent = 'Compris';
+  modalAction.onclick = closeModal;
+  modal.classList.add('show');
+}
+
+function closeModal() { modal.classList.remove('show'); }
+
+document.getElementById('modalClose').addEventListener('click', closeModal);
+modalAction.addEventListener('click', closeModal);
+modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* Ce formulaire ne transmet ni ne conserve de données tant qu'un service de contact n'est pas configuré. */
+document.getElementById('healthForm').addEventListener('submit', e => {
+  e.preventDefault();
+  alert(window.translatePhrase(
+    'Ce formulaire de contact n’est pas encore opérationnel. Aucun message n’a été envoyé ni enregistré. Ne saisissez pas de données de santé ici.',
+    'This contact form is not available yet. No message was sent or saved. Do not enter health information here.'
+  ));
+});
+
+/* Le fil n'affiche plus de témoignages fictifs ; src/community.js le charge depuis Supabase. */
+let posts = [];
+
+function escapeHTML(str) {
+  return String(str).replace(/[&<>"']/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[char]));
+}
+
+function renderPost(post, full = false) {
+  const commentsHTML = (post.comments || []).map(c =>
+    `<div class="comment">${escapeHTML(c)}</div>`
+  ).join('');
+
+  return `
+    <article class="${full ? 'feed-post' : 'post'}" data-post="${post.id}">
+      <div class="post-head">
+        <div class="avatar">${escapeHTML(post.initials)}</div>
+        <div class="post-meta">
+          <strong>${escapeHTML(post.name)}</strong>
+          <small>${escapeHTML(post.time)}</small>
+        </div>
+      </div>
+      <span class="post-tag">${escapeHTML(post.group)}</span>
+      <h4>${escapeHTML(post.title)}</h4>
+      <p class="${full ? 'post-body' : ''}">${escapeHTML(post.text)}</p>
+      <div class="post-actions">
+        <button class="like-btn ${post.liked ? 'liked' : ''}" data-like="${post.id}">♡ ${post.likes} soutien(s)</button>
+        <button data-comment-toggle="${post.id}">💬 ${(post.comments || []).length} réponse(s)</button>
+        <button data-report="${post.id}">⚑ Signaler</button>
+      </div>
+      <div class="comments" id="comments-${post.id}">
+        ${commentsHTML}
+        <form class="comment-form" data-comment-form="${post.id}">
+          <input name="comment" maxlength="300" placeholder="Écrire un commentaire..." required>
+          <button type="submit">Envoyer</button>
+        </form>
+      </div>
+    </article>
+  `;
+}
+
+function renderFeeds() {
+  const homeFeed = document.getElementById('homeFeed');
+  const communityFeed = document.getElementById('communityFeed');
+
+  homeFeed.innerHTML = posts.slice(0, 2).map(p => renderPost(p)).join('');
+  communityFeed.innerHTML = posts.map(p => renderPost(p, true)).join('');
+}
+
+renderFeeds();
+
+/* ACTIONS DU FIL COMMUNAUTAIRE */
+document.addEventListener('click', e => {
+  const likeBtn = e.target.closest('[data-like]');
+  if (likeBtn) {
+    const post = posts.find(p => p.id === Number(likeBtn.dataset.like));
+    if (!post) return;
+    post.liked = !post.liked;
+    post.likes += post.liked ? 1 : -1;
+    renderFeeds();
+    return;
+  }
+
+  const commentBtn = e.target.closest('[data-comment-toggle]');
+  if (commentBtn) {
+    const box = document.getElementById('comments-' + commentBtn.dataset.commentToggle);
+    if (box) box.classList.toggle('open');
+    return;
+  }
+
+  const reportBtn = e.target.closest('[data-report]');
+  if (reportBtn) {
+    openModal('support');
+  }
+});
+
+/* COMMENTAIRES DEMO */
+document.addEventListener('submit', e => {
+  const form = e.target.closest('[data-comment-form]');
+  if (!form) return;
+
+  e.preventDefault();
+  const postId = Number(form.dataset.commentForm);
+  const input = form.querySelector('input[name="comment"]');
+  const value = input.value.trim();
+  if (!value) return;
+
+  const post = posts.find(p => p.id === postId);
+  if (!post) return;
+
+  post.comments.push(value);
+  renderFeeds();
+
+  const commentBox = document.getElementById('comments-' + postId);
+  if (commentBox) commentBox.classList.add('open');
+});
+
+/* CREATION DE POST — DEMO */
+document.getElementById('publishPost').addEventListener('click', () => {
+  const textarea = document.getElementById('newPostText');
+  const group = document.getElementById('newPostGroup').value;
+  const text = textarea.value.trim();
+
+  if (!text) {
+    alert(window.translatePhrase('Écrivez un message avant de publier.', 'Write a message before posting.'));
+    textarea.focus();
+    return;
+  }
+
+  posts.unshift({
+    id: Date.now(),
+    name: 'Visiteur AN.O',
+    initials: 'A',
+    group: group,
+    time: 'À l’instant',
+    title: 'Partage de la communauté',
+    text: text,
+    likes: 0,
+    comments: [],
+    liked: false
+  });
+
+  textarea.value = '';
+  renderFeeds();
+  alert(window.translatePhrase('La publication n’a pas été envoyée.', 'The post was not sent.'));
+  navigate('community');
+});
+
+/* DATE */
+const today = new Date();
+function updateLocaleDate() {
+  const locale = window.getCurrentLanguage() === 'en' ? 'en-US' : 'fr-FR';
+  document.getElementById('dateToday').textContent = '✦ ' + today.toLocaleDateString(locale, {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+}
+document.addEventListener('languagechange', updateLocaleDate);
+updateLocaleDate();
+</script>
+<script type="module" src="./src/patient-dashboard.js"></script>
+<script type="module" src="./src/community.js"></script>
+</body>
+</html>

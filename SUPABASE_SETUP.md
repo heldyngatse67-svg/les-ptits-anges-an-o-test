@@ -63,11 +63,13 @@ Ne donnez ces rôles qu'après vérification. La plateforme n'inclut pas encore 
 
 `npm.cmd run build` compile les quatre pages et leurs modules. Une compilation réussie ne valide pas à elle seule une connexion distante, les rôles, les politiques RLS ou le stockage Supabase.
 
-## Publier une version de test sur GitHub Pages
+## Publication de test sur GitHub Pages
 
-Le workflow `.github/workflows/deploy-pages.yml` compile et publie le site à chaque push sur `main`. Le chemin Vite est configuré pour le dépôt `les-ptits-anges-an-o-test`; si vous choisissez un autre nom de dépôt, mettez aussi à jour `base` dans `vite.config.js`.
+Le dépôt public [heldyngatse67-svg/les-ptits-anges-an-o-test](https://github.com/heldyngatse67-svg/les-ptits-anges-an-o-test) est configuré pour GitHub Pages via Actions. Une fois le workflow réussi, le site sera disponible sur [heldyngatse67-svg.github.io/les-ptits-anges-an-o-test](https://heldyngatse67-svg.github.io/les-ptits-anges-an-o-test/). Le workflow `.github/workflows/deploy-pages.yml` compile et publie le site à chaque push sur `main`. Le chemin Vite est configuré pour ce dépôt; si vous choisissez un autre nom de dépôt, mettez aussi à jour `base` dans `vite.config.js`.
 
-1. Créez le dépôt public `les-ptits-anges-an-o-test` sur GitHub. GitHub Pages gratuit exige un dépôt public.
+Les variables Actions publiques `VITE_SUPABASE_URL` et `VITE_SUPABASE_ANON_KEY` sont configurées pour la compilation. Elles ne sont pas des secrets; ne stockez jamais de clé `service_role`, de clé secrète ou de mot de passe PostgreSQL dans le dépôt ou les variables frontend.
+
+1. Pour reproduire la publication sur un autre dépôt, créez un dépôt public. GitHub Pages gratuit exige un dépôt public.
 2. Installez Git for Windows si Git n'est pas disponible, puis initialisez le dépôt local et poussez la branche `main` :
 
    ```powershell
